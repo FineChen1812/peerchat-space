@@ -31,7 +31,7 @@ let displayRoutes = require('express-routemap')
 const PeerServer = require('peer').PeerServer
 const peerOption = {
   port: 9000, 
-  path: '/gcra',
+  path: '/peerchat',
   ssl: httpsOption,
   debug: 3
 }
