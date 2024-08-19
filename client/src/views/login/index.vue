@@ -33,16 +33,10 @@ const register = () => {
     }
   })
 }
+
+const isLog = ref(false)
+
 </script>
-<!-- display: block;
-    margin: 20px auto;
-    background: #262e49;
-    border: 0;
-    border-radius: 5px;
-    padding: 14px 10px;
-    width: 320px;
-    outline: 0;
-    color: #d6d6d6; -->
 <template>
   <div class="w-full h-full flex justify-center items-center bg-[#1d243d]">
     <div
@@ -58,19 +52,16 @@ const register = () => {
           </a-input>
         </a-form-item>
         <a-form-item>
-          <a-input class="bg-[#262e49] px-[6px] py-[10px] placeholder:text-[#d6d6d6] text-[#d6d6d6] border-0" v-model:value="loginForm.password" type="password" placeholder="请输入密码">
+          <a-input class="bg-[#262e49] px-[6px] py-[10px] placeholder:text-[#d6d6d6] text-[#d6d6d6] border-0" v-model:value="loginForm.password" type="text" placeholder="请输入密码">
           </a-input>
         </a-form-item>
-        <!-- <a-form-item>
-          <a-button type="primary" danger class="w-full h-[60px] text-[24px]" @click.native.prevent="register">
-            <span>注 册</span>
-          </a-button>
-        </a-form-item> -->
         <a-form-item>
-          <a-button type="primary" class="w-full h-[50px] mt-[10px] text-[24px] bg-[#7f5feb] rounded-full" @click.native.prevent="submitForm">
-            <span>登 录</span>
+          <a-button type="primary" class="w-full h-[50px] mt-[10px] text-[24px] bg-[#7f5feb] rounded-full" @click.native.prevent="isLog? register():submitForm()">
+            <span>{{  isLog ? '注 册' : '登 录'}}</span>
           </a-button>
-          <div>没账号?注册</div>
+          <div class="mt-[10px] text-end text-[#5c6bc0] cursor-pointer" @click="isLog = !isLog">
+            {{  isLog ? '已有账号?登录' : '没账号?注册'}}
+          </div>
         </a-form-item>
       </a-form>
     </div>
