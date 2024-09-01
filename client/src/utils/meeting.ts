@@ -1,5 +1,5 @@
 import Peer from 'peerjs'
-import { usePeerStore, useUserStore } from '~/store'
+import { usePeerStore, useUserStore } from '~store'
 
 export const initPeer = () => {
   return new Promise(resolve => {

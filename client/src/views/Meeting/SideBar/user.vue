@@ -2,7 +2,7 @@
 import { h } from 'vue'
 import { VideoCameraOutlined } from '@ant-design/icons-vue'
 import { UserList } from '~/api/user'
-import { usePeerStore } from '~/store'
+import { usePeerStore } from '~store'
 import useSendVideo from '~/hooks/useSendVideo'
 
 const active = ref(1)

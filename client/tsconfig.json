@@ -7,7 +7,8 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      "~store": ["src/modules/pinia/modules/index.ts"]
     },
 
     /* Bundler mode */

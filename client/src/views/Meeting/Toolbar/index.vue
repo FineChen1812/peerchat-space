@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { AudioOutlined, MessageOutlined, VideoCameraOutlined, UserOutlined, CaretDownOutlined  } from '@ant-design/icons-vue'
 import { message } from 'ant-design-vue'
-import { usePeerStore } from '~/store'
+import { usePeerStore } from '~store'
 import useRingOff from '~/hooks/useRingOff'
 import useGetMedia from '~/hooks/useGetMedia'
 

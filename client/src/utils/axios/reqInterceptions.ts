@@ -1,5 +1,5 @@
 import type { InternalAxiosRequestConfig } from 'axios'
-import { useUserStore } from '~/store'
+import { useUserStore } from '~store'
 
 const userStore = useUserStore()
 

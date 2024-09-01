@@ -8,6 +8,11 @@ const router = createRouter({
       redirect: '/home'
     },
     {
+      path: '/meeting',
+      name: 'Meeting',
+      component: () => import('~/views/Meeting/index.vue')
+    },
+    {
       path: '/home',
       name: 'Home',
       component: () => import('~/views/Home/index.vue')
@@ -15,7 +20,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'Login',
-      component: () => import('~/views/login/index.vue')
+      component: () => import('~/views/Login/index.vue')
     }
   ]
 })

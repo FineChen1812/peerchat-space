@@ -1,5 +1,5 @@
 import type { DataConnection, MediaConnection } from "peerjs" 
-import { usePeerStore, useUserStore } from "~/store"
+import { usePeerStore, useUserStore } from "~store"
 import useGetMedia from "./useGetMedia"
 import useRingOff from '~/hooks/useRingOff'
 import { mergeArrayBuffers } from "~/utils/util"

@@ -1,4 +1,4 @@
-import { usePeerStore, useUserStore } from "~/store"
+import { usePeerStore, useUserStore } from "~store"
 import useGetMedia from '~/hooks/useGetMedia'
 import useRingOff from '~/hooks/useRingOff'
 import { mergeArrayBuffers } from "~/utils/util"

@@ -3,7 +3,7 @@ import { SmileOutlined, PictureOutlined, FolderOpenOutlined, UserOutlined, Verti
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import { EmojiList } from '~/utils/emoji'
 import { getCurTime, getImageUrl, mergeArrayBuffers } from '~/utils/util'
-import { usePeerStore, useUserStore } from '~/store'
+import { usePeerStore, useUserStore } from '~store'
 import useGetMedia from '~/hooks/useGetMedia'
 
 const messages = ref('')

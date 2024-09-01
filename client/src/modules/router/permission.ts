@@ -1,8 +1,8 @@
 
-import router from './router'
+import router from './base'
 import { getToken } from '~/utils/cookie'
 
-const whiteList = ['/login']
+const whiteList = ['/login', '/home']
 
 router.beforeEach(async (to, from, next) => {
   const hasToken = getToken()
@@ -16,7 +16,7 @@ router.beforeEach(async (to, from, next) => {
     if (whiteList.indexOf(to.path) !== -1) {
       return next()
     } else {
-      next(`/login?redirect=${to.path}`)
+      next(`/login`)
     }
   }
 })

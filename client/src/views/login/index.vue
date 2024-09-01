@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { UserRegister, UserLogin } from '~/api/auth'
-import { useUserStore } from '~/store'
+import { useUserStore } from '~store'
 
 import { message } from 'ant-design-vue'
 const userStore = useUserStore()
@@ -38,28 +38,28 @@ const isLog = ref(false)
 
 </script>
 <template>
-  <div class="w-full h-full flex justify-center items-center bg-[#1d243d]">
+  <div class="w-full h-full flex justify-center items-center">
     <div
-      class="w-[400px] h-[500px] bg-[#212942] rounded-[10px] border-t-[10px] border-t-[#79a6fe] border-b-[10px] border-b-[#8BD17C] text-center">
+      class="w-[400px] h-[500px] shadow-md rounded-[10px] border-t-[10px] border-t-[#1677ff] border-b-[10px] border-b-[#0099CC] text-center">
       <div class="text-4xl mt-[60px]">
-        <span class="text-[#5c6bc0]">peerchat-</span>
-        <span class="text-white">space</span>
+        <span class="text-[#1677ff]">peerchat-</span>
+        <span class="text-[#0099CC]">space</span>
       </div>
       <div class="text-[#a1a4ad] mt-[10px]">一个基于peerjs的会议室练习项目.</div>
       <a-form :model="loginForm" class="px-6 mt-[50px]">
         <a-form-item>
-          <a-input class="bg-[#262e49] px-[6px] py-[10px] placeholder:text-[#d6d6d6] text-[#d6d6d6] border-0" v-model:value="loginForm.username" type="text" placeholder="请输入用户名">
+          <a-input class="px-[6px] py-[10px]" v-model:value="loginForm.username" type="text" placeholder="请输入用户名">
           </a-input>
         </a-form-item>
         <a-form-item>
-          <a-input class="bg-[#262e49] px-[6px] py-[10px] placeholder:text-[#d6d6d6] text-[#d6d6d6] border-0" v-model:value="loginForm.password" type="text" placeholder="请输入密码">
+          <a-input class="px-[6px] py-[10px]" v-model:value="loginForm.password" type="text" placeholder="请输入密码">
           </a-input>
         </a-form-item>
         <a-form-item>
-          <a-button type="primary" class="w-full h-[50px] mt-[10px] text-[24px] bg-[#7f5feb] rounded-full" @click.native.prevent="isLog? register():submitForm()">
+          <a-button type="primary" class="w-full h-[50px] mt-[10px] text-[24px] rounded-full" @click.native.prevent="isLog? register():submitForm()">
             <span>{{  isLog ? '注 册' : '登 录'}}</span>
           </a-button>
-          <div class="mt-[10px] text-end text-[#5c6bc0] cursor-pointer" @click="isLog = !isLog">
+          <div class="mt-[10px] text-end text-[#1677ff] cursor-pointer" @click="isLog = !isLog">
             {{  isLog ? '已有账号?登录' : '没账号?注册'}}
           </div>
         </a-form-item>

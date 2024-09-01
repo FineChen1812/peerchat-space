@@ -1,4 +1,4 @@
-import { usePeerStore } from '~/store'
+import { usePeerStore } from '~store'
 import useGetMedia from '~/hooks/useGetMedia'
 
 export default () => {

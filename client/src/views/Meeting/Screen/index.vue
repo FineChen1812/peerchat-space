@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { UserOutlined  } from '@ant-design/icons-vue'
-import { usePeerStore } from '~/store'
+import { usePeerStore } from '~store'
 import { storeToRefs } from 'pinia'
 import { message } from 'ant-design-vue'
 import useAcceptVideo from '~/hooks/useAcceptVideo'

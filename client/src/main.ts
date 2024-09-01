@@ -1,10 +1,11 @@
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 import './style.css'
-import './permission'
-import router from './router/index'
 import App from './App.vue'
+import installPlugins from './modules'
 
-const app = createApp(App)
-app.use(createPinia()).use(router)
-app.mount('#app')
+function bootstrap() {
+  const app = createApp(App)
+  installPlugins(app)
+  app.mount('#app')
+}
+bootstrap()
