@@ -4,7 +4,8 @@ import { getCurrentDateTime } from '~/utils/util'
 
 const time = ref('')
 const date = ref('')
-let timer = null
+const router = useRouter()
+let timer:ReturnType<typeof setInterval> | null = null
 
 onMounted(() => {
   timer = setInterval(() => {
@@ -14,14 +15,22 @@ onMounted(() => {
   }, 1000)
 })
 
+onBeforeUnmount(() => {
+  if (timer) clearInterval(timer)
+})
+
+const login = () => {
+  router.push('/login')
+}
+
 </script>
 <template>
   <div class="w-full h-full flex justify-center items-center">
     <div class="w-[720px] h-[480px] shadow-md rounded-[10px] bg-[#f0f1f5] flex">
       <div class="h-full w-[75px] text-center flex p-[20px] pt-[40px] flex-col justify-between">
         <div>
-          <!-- 登录 -->
-          <a-avatar class="text-white bg-[#1677ff]">阿峰</a-avatar>
+          <span class="text-sm text-[#1677ff] cursor-pointer" @click="login">登录</span>
+          <!-- <a-avatar class="text-white bg-[#1677ff]">阿峰</a-avatar> -->
         </div>
         <div><SettingOutlined /></div>
       </div>
