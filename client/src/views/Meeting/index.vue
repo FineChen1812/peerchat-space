@@ -2,18 +2,11 @@
 import Toolbar from './Toolbar/index.vue'
 import SideBar from './SideBar/index.vue'
 import Screen from './Screen/index.vue'
-import { initWebscoket, initPeer } from '~/utils/meeting'
 import { usePeerStore } from '~store'
 const type = ref('user')
 const selectFeature = (selectType:any) => {
   type.value = selectType
 }
-
-onMounted(() => {
-  initPeer().then(() => {
-    initWebscoket()
-  })
-})
 
 const peerStore = usePeerStore()
 onBeforeUnmount(() => {
