@@ -4,6 +4,7 @@ import { getCurrentDateTime } from '~/utils/util'
 import { initWebscoket, initPeer } from '~/utils/meeting'
 import { message } from 'ant-design-vue'
 import { useClipboard } from '@vueuse/core'
+import useGetMedia from '~/hooks/useGetMedia'
 
 import { useUserStore } from '~store'
 
@@ -34,20 +35,22 @@ const login = () => {
   router.push('/login')
 }
 
+const { isVideoEnabled, isAudioEnabled } = useGetMedia()
 const open = ref<boolean>(false)
 const isStart = ref<boolean>(true)
 const title = ref<string>('发起会议')
 const meetingNum = ref<number | null>(null)
+
 const startMeeting = () => {
-  if (!userStore.userInfo) message.warning('请先登录!')
+  if (!userStore.userInfo) return message.warning('请先登录!')
   isStart.value = true
   open.value = true
   title.value = '发起会议'
 }
 
 const joinMeeting = () => {
+  if (!userStore.userInfo) return message.warning('请先登录!')
   isStart.value = false
-  if (!userStore.userInfo) message.warning('请先登录!')
   open.value = true
   title.value = '加入会议'
 }
@@ -55,8 +58,7 @@ const joinMeeting = () => {
 const onBlur = () => {
 
 }
-const check1 = ref<boolean>(false)
-const check2 = ref<boolean>(false)
+
 const inputNum = ref('12345678')
 const { copy, copied } = useClipboard()
 watch(copied, (val)=> {
@@ -83,11 +85,11 @@ watch(copied, (val)=> {
     </div>
     <div class="flex items-center justify-between mt-5">
       <div>入会时打开摄像头</div>
-      <a-switch v-model:checked="check1" checked-children="开" un-checked-children="关" />
+      <a-switch v-model:checked="isVideoEnabled" checked-children="开" un-checked-children="关" />
     </div>
     <div class="flex items-center justify-between mt-5">
       <div>入会时打开麦克风</div>
-      <a-switch v-model:checked="check2" checked-children="开" un-checked-children="关" />
+      <a-switch v-model:checked="isAudioEnabled" checked-children="开" un-checked-children="关" />
     </div>
     <a-button size="large" class="w-full mt-5" type="primary">{{ title }}</a-button>
   </a-modal>
@@ -95,8 +97,8 @@ watch(copied, (val)=> {
     <div class="w-[720px] h-[480px] shadow-md rounded-[10px] bg-[#f0f1f5] flex">
       <div class="h-full w-[75px] text-center flex p-[20px] pt-[40px] flex-col justify-between">
         <div>
-          <span class="text-sm text-[#1677ff] cursor-pointer" @click="login">登录</span>
-          <!-- <a-avatar class="text-white bg-[#1677ff]">阿峰</a-avatar> -->
+          <a-avatar v-if="userStore.userInfo" class="text-white bg-[#1677ff]">{{ userStore.userInfo.username.substr(-2, 2) }}</a-avatar>
+          <span v-else class="text-sm text-[#1677ff] cursor-pointer" @click="login">登录</span>
         </div>
         <div><SettingOutlined /></div>
       </div>

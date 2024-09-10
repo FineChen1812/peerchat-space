@@ -26,6 +26,7 @@ async function Login(req, res) {
     let M = payload.salt.slice(0, 3) + password + payload.salt.slice(3)
     // 将M进行MD5哈希，得到哈希值
     let hash = crypto.createHash('md5').update(M).digest('hex')
+    console.log(hash, 'err')
     if (hash != payload.password) return RespError(res, RespServerErr)
     const token = jwt.sign(payload, secretKey)
     let data = {
@@ -38,18 +39,9 @@ async function Login(req, res) {
         phone: results[0].phone,
         created_at: new Date(results[0].created_at).toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-'),
         signature: results[0].signature,
-        type: results[0].type
       }
     }
-    const sqlStr = 'update user set online_status=? where username=?'
-    db.query(sqlStr, ['online', username], (err, result) => {
-      // 执行 SQL 语句失败了
-      if (err) return RespError(res, RespServerErr)
-      if (result.affectedRows === 1) {
-        return RespData(res, data)
-      }
-      return RespError(res, RespUpdateErr)
-    })
+    return RespData(res, data)
   } else {
     return RespError(res, RespUserOrPassErr)
   }
@@ -74,12 +66,9 @@ async function Register(req, res){
     avatar: "",
     username: username,
     password: hash,
-    name: username,
     phone: "",
     room: '',
     salt: salt,
-    remark: '',
-    type: 1
   }
   const sqlStr = 'insert into user set ?'
   let res2 = await Query(sqlStr, user)

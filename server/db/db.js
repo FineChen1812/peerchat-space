@@ -4,7 +4,7 @@ const fs = require('fs')
 /**
  * 初始化参数
  */
-let host = '192.168.0.106'
+let host = '192.168.0.108'
 let port = 3316
 let user = 'root'
 let password = '123456'
@@ -58,8 +58,6 @@ function initEquipmentTable() {
         id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
         user_id INT(11) NOT NULL,
         username VARCHAR(50) NOT NULL,
-        online_status ENUM('online', 'offline') DEFAULT 'offline',
-        remark VARCHAR(50),
         room  VARCHAR(255),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;      

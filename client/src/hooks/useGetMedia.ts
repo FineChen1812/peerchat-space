@@ -27,6 +27,8 @@ const timer:Ref< ReturnType<typeof setInterval> | null> = ref(null)
 const time:Ref<string> = ref('00:00')
 const cameraId:Ref<string> = ref('') 
 const microphoneId:Ref<string> = ref('') 
+const isVideoEnabled:Ref<boolean> = ref(false)
+const isAudioEnabled:Ref<boolean> = ref(false)
 
 const getTime = () => {
   let seconds = 0
@@ -72,6 +74,8 @@ export default () => {
     time,
     getTime,
     cameraId,
-    microphoneId
+    microphoneId,
+    isVideoEnabled,
+    isAudioEnabled
   }
 }
