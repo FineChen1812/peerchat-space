@@ -27,6 +27,7 @@ export const mergeArrayBuffers = (arrays:ArrayBuffer[]) => {
   }
   return res.buffer
 }
+
 export const getCurrentDateTime = () => {
   
   const now = new Date()
@@ -38,4 +39,12 @@ export const getCurrentDateTime = () => {
   const seconds = String(now.getSeconds()).padStart(2, '0')
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+}
+
+export const generateMeetingNumber = () => {
+  let meetingNumber = ''
+  for (let i = 0; i < 10; i++) {
+    meetingNumber += Math.floor(Math.random() * 10)
+  }
+  return meetingNumber.slice(0, 3) + '-' + meetingNumber.slice(3, 6) + '-' + meetingNumber.slice(6)
 }

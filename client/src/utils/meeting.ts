@@ -1,11 +1,12 @@
 import Peer from 'peerjs'
 import { usePeerStore, useUserStore } from '~store'
+import { generateMeetingNumber } from './util'
 
 export const initPeer = () => {
   return new Promise(resolve => {
     let peerStore = usePeerStore()
     if(peerStore.localPeer) return resolve(null)
-    let localPeer = new Peer({
+    let localPeer = new Peer(generateMeetingNumber(), {
       host: import.meta.env.VITE_PEER_HOST,
       port: import.meta.env.VITE_PEER_PORT,
       path: import.meta.env.VITE_PEER_PATH

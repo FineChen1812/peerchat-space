@@ -5,8 +5,9 @@ import { initWebscoket, initPeer } from '~/utils/meeting'
 import { message } from 'ant-design-vue'
 import { useClipboard } from '@vueuse/core'
 import useGetMedia from '~/hooks/useGetMedia'
+import { storeToRefs } from 'pinia'
 
-import { useUserStore } from '~store'
+import { useUserStore, usePeerStore } from '~store'
 
 const time = ref('')
 const date = ref('')
@@ -40,12 +41,17 @@ const open = ref<boolean>(false)
 const isStart = ref<boolean>(true)
 const title = ref<string>('发起会议')
 const meetingNum = ref<number | null>(null)
+const { localPeer } = storeToRefs(usePeerStore())
 
-const startMeeting = () => {
+const initMeeting = () => {
   if (!userStore.userInfo) return message.warning('请先登录!')
   isStart.value = true
   open.value = true
   title.value = '发起会议'
+}
+
+const startMeeting = () => {
+  router.push('/meeting')
 }
 
 const joinMeeting = () => {
@@ -59,7 +65,6 @@ const onBlur = () => {
 
 }
 
-const inputNum = ref('12345678')
 const { copy, copied } = useClipboard()
 watch(copied, (val)=> {
   if (val) message.success({ content: '复制成功!', duration: 2 })
@@ -69,10 +74,10 @@ watch(copied, (val)=> {
   <a-modal v-model:open="open" :title="title" width="400px" :footer="null" :maskClosable="false" :centered="true">
     <div v-if="isStart" class="flex items-center justify-between mt-5">
       <div class="w-[150px]">个人会议号</div>
-      123456678
+      {{ localPeer.id }}
       <a-tooltip>
         <template #title>复制会议号</template>
-        <IconCopy class="cursor-pointer" @click="copy(inputNum)"/>
+        <IconCopy class="cursor-pointer" @click="copy(localPeer.id)"/>
       </a-tooltip>
     </div>
     <div v-if="!isStart" class="flex items-center mt-5">
@@ -91,7 +96,7 @@ watch(copied, (val)=> {
       <div>入会时打开麦克风</div>
       <a-switch v-model:checked="isAudioEnabled" checked-children="开" un-checked-children="关" />
     </div>
-    <a-button size="large" class="w-full mt-5" type="primary">{{ title }}</a-button>
+    <a-button size="large" class="w-full mt-5" type="primary" @click="startMeeting">{{ title }}</a-button>
   </a-modal>
   <div class="w-full h-full flex justify-center items-center">
     <div class="w-[720px] h-[480px] shadow-md rounded-[10px] bg-[#f0f1f5] flex">
@@ -105,7 +110,7 @@ watch(copied, (val)=> {
       <div class="bg-white w-full rounded-[10px] border-t-[#f0f1f5] border-t flex items-center">
         <div class="w-[330px] flex justify-center items-center h-full">
           <div>
-            <div class="w-[72px] cursor-pointer h-[72px] flex flex-wrap justify-center items-center bg-[#1677ff] rounded-2xl" @click="startMeeting">
+            <div class="w-[72px] cursor-pointer h-[72px] flex flex-wrap justify-center items-center bg-[#1677ff] rounded-2xl" @click="initMeeting">
               <IconPhoneVideoCall theme="filled" size="48" fill="#fff"/>
             </div>
             <div class="text-sm text-[#53576a] text-center mt-4">发起会议</div>

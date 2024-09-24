@@ -4,7 +4,7 @@ const fs = require('fs')
 /**
  * 初始化参数
  */
-let host = '192.168.0.108'
+let host = '192.168.0.105'
 let port = 3316
 let user = 'root'
 let password = '123456'
