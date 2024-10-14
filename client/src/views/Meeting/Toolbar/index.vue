@@ -24,7 +24,7 @@ const closeMeeting = () => {
 
 const cameras: Ref<MediaDeviceInfo[]> = ref([])
 const microphones: Ref<MediaDeviceInfo[]> = ref([])
-const { cameraId, microphoneId } = useGetMedia()
+const { cameraId, microphoneId, isVideoEnabled, isAudioEnabled, localVideo } = useGetMedia()
 const getDevices = async () => {
   try {
     const devices = await navigator.mediaDevices.enumerateDevices()
@@ -42,14 +42,30 @@ const getDevices = async () => {
   }
 }
 
+const disableVideo = () => {
+  if (localVideo.value) {
+    localVideo.value.getVideoTracks().forEach(track => track.enabled = isVideoEnabled.value)
+    isVideoEnabled.value = !isVideoEnabled.value
+  }
+}
+
+const disableAudio = () => {
+  if (localVideo.value) {
+    localVideo.value.getAudioTracks().forEach(track => track.enabled = isAudioEnabled.value)
+    isAudioEnabled.value = !isAudioEnabled.value
+  }
+}
+
 onMounted(() => {
   getDevices()
+  if (localVideo.value)localVideo.value.getVideoTracks().forEach(track => track.enabled = isVideoEnabled.value)
+  if (localVideo.value)localVideo.value.getAudioTracks().forEach(track => track.enabled = isAudioEnabled.value)
 })
 </script>
 
 <template>
   <div class="h-[60px] w-full flex justify-center pt-[5px] relative" style="background-image: linear-gradient(180deg, #33333f, #292933);">
-    <div class="text-white text-center px-[10px] cursor-pointer">
+    <div class="text-white text-center px-[10px] cursor-pointer" @click="disableAudio">
       <div class="text-[18px]"><AudioOutlined /> </div>
       解除静音
     </div>
@@ -67,7 +83,7 @@ onMounted(() => {
         </template>
       </a-dropdown>
     </div>
-    <div class="text-white text-center px-[10px] cursor-pointer">
+    <div class="text-white text-center px-[10px] cursor-pointer" @click="disableVideo">
       <div class="text-[18px]"><VideoCameraOutlined /></div>
       开启视频
     </div>
